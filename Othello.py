@@ -45,7 +45,9 @@ class Othello:
                         "edge": "*",
                         }
         self._option_opp = {"black": 'O',
-                          "white": 'X'}
+                          "white": 'X',
+                        "O": 'black',
+                        "X": 'white'}
 
     def print_board(self):
         """"""
@@ -75,6 +77,12 @@ class Othello:
                 if player.get_color() == "black":
                     return f"Winner is black player: {player.get_name()}"
 
+    def flip_pieces(self, color, conversion, r, c):
+        if self._board[r][c] == self._option_1[color]:
+            for coord in conversion:
+                (r, c) = coord
+                self._board[r][c] = self._option_1[color]
+
     def update_board(self, color, piece_position):
         (r, c) = piece_position
         conversion = []
@@ -84,6 +92,8 @@ class Othello:
             while self._board[r][c] == self._option_opp[color]:
                 conversion.append((r, c))
                 r += 1
+            self.flip_pieces(color, conversion, r, c)
+            conversion = []
             (r, c) = temp
         if self._board[r - 1][c] == self._option_opp[color]:
             temp = (r, c)
@@ -91,6 +101,8 @@ class Othello:
             while self._board[r][c] == self._option_opp[color]:
                 conversion.append((r, c))
                 r -= 1
+            self.flip_pieces(color, conversion, r, c)
+            conversion = []
             (r, c) = temp
         if self._board[r][c + 1] == self._option_opp[color]:
             temp = (r, c)
@@ -98,6 +110,8 @@ class Othello:
             while self._board[r][c] == self._option_opp[color]:
                 conversion.append((r, c))
                 c += 1
+            self.flip_pieces(color, conversion, r, c)
+            conversion = []
             (r, c) = temp
         if self._board[r][c - 1] == self._option_opp[color]:
             temp = (r, c)
@@ -105,6 +119,8 @@ class Othello:
             while self._board[r][c] == self._option_opp[color]:
                 conversion.append((r, c))
                 c -= 1
+            self.flip_pieces(color, conversion, r, c)
+            conversion = []
             (r, c) = temp
         if self._board[r + 1][c + 1] == self._option_opp[color]:
             temp = (r, c)
@@ -114,6 +130,8 @@ class Othello:
                 conversion.append((r, c))
                 r += 1
                 c += 1
+            self.flip_pieces(color, conversion, r, c)
+            conversion = []
             (r, c) = temp
         if self._board[r + 1][c - 1] == self._option_opp[color]:
             temp = (r, c)
@@ -123,6 +141,8 @@ class Othello:
                 conversion.append((r, c))
                 r += 1
                 c -= 1
+            self.flip_pieces(color, conversion, r, c)
+            conversion = []
             (r, c) = temp
         if self._board[r - 1][c + 1] == self._option_opp[color]:
             temp = (r, c)
@@ -132,6 +152,8 @@ class Othello:
                 conversion.append((r, c))
                 r -= 1
                 c += 1
+            self.flip_pieces(color, conversion, r, c)
+            conversion = []
             (r, c) = temp
         if self._board[r - 1][c - 1] == self._option_opp[color]:
             temp = (r, c)
@@ -141,13 +163,12 @@ class Othello:
                 conversion.append((r, c))
                 r -= 1
                 c -= 1
+            self.flip_pieces(color, conversion, r, c)
+            conversion = []
             (r, c) = temp
-        if self._board[r][c] == self._option_1[color]:
-            for coord in conversion:
-                (r, c) = coord
-                self._board[r][c] = self._option_1[color]
-            print(f"Board updated. You have flipped a total of "
-                  f"{len(conversion)} of your opponent's pieces")
+
+        print(f"Board updated. You have flipped a total of "
+                f"{len(conversion)} of your opponent's pieces")
 
     def return_available_positions(self, color):
         result = set()
@@ -235,6 +256,10 @@ class Othello:
         self.update_board(color, piece_position)
         print("Move successful. Here is the update board:")
         self.print_board()
+        print(f"{self._option_opp[self._option_1[color]]} player, here are "
+              f"your available moves:  ")
+        print(self.return_available_positions(self._option_opp[self._option_1[
+            color]]))
 
     def play_game(self, player_color, piece_position):
         if len(self.return_available_positions(player_color)) == 0:
@@ -259,3 +284,8 @@ game.print_board()
 Andrew = game.create_player("Andrew", "black")
 var = game.return_available_positions("black")
 print(var)
+game.play_game("black", (6,5))
+print(game.return_available_positions("white"))
+game.play_game("white", (6,6))
+game.play_game("white", (7,5))
+game.play_game("black", (8,5))
