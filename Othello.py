@@ -281,18 +281,18 @@ class Othello:
 
 
 
-game = Othello()
-
-game.print_board()
-Andrew = game.create_player("Andrew", "black")
-var = game.return_available_positions("black")
-print(var)
-game.play_game("black", (6,5))
-print(game.return_available_positions("white"))
-game.play_game("white", (6,6))
-game.play_game("white", (7,5))
-game.play_game("black", (8,5))
-game.play_game("white", (100, 100))
+# game = Othello()
+#
+# game.print_board()
+# Andrew = game.create_player("Andrew", "black")
+# var = game.return_available_positions("black")
+# print(var)
+# game.play_game("black", (6,5))
+# print(game.return_available_positions("white"))
+# game.play_game("white", (6,6))
+# game.play_game("white", (7,5))
+# game.play_game("black", (8,5))
+# game.play_game("white", (100, 100))
 
 # game = Othello()
 # game.print_board()
