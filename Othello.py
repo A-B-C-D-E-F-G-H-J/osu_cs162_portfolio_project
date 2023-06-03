@@ -248,7 +248,9 @@ class Othello:
                         if self._board[r][c] == self._option_1["empty"]:
                             result.add((r, c))
                         (r, c) = temp
-        return list(result)
+        result = list(result)
+        result.sort()
+        return result
 
     def make_move(self, color, piece_position):
         (r, c) = piece_position
@@ -289,3 +291,12 @@ class Othello:
 # game.play_game("white", (6,6))
 # game.play_game("white", (7,5))
 # game.play_game("black", (8,5))
+
+game = Othello()
+game.print_board()
+game.create_player("Helen", "white")
+game.create_player("Leo", "black")
+game.play_game("black", (6,5))
+game.print_board()
+game.play_game("white", (6,6))
+game.print_board()
