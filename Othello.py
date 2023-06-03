@@ -256,19 +256,20 @@ class Othello:
         (r, c) = piece_position
         self._board[r][c] = self._option_1[color]
         self.update_board(color, piece_position)
-        print("Move successful. Here is the update board:")
-        self.print_board()
-        print(f"{self._option_opp[self._option_1[color]]} player, here are "
-              f"your available moves:  ")
-        print(self.return_available_positions(self._option_opp[self._option_1[
-            color]]))
+        #print("Move successful. Here is the update board:")
+        return self._board
+        #print(f"{self._option_opp[self._option_1[color]]} player, here are "
+        #      f"your available moves:  ")
+        #print(self.return_available_positions(self._option_opp[self._option_1[
+        #    color]]))
 
     def play_game(self, player_color, piece_position):
         if len(self.return_available_positions(player_color)) == 0:
-            return self.return_available_positions(player_color)
+            return []
+            #return self.return_available_positions(player_color)
         if piece_position not in self.return_available_positions(player_color):
-            print("Invalid Move, here are the valid moves:")
-            print(self.return_available_positions(player_color))
+            return f"Invalid Move, here are the valid moves: " \
+                   f"{self.return_available_positions(player_color)}"
         else:
             self.make_move(player_color, piece_position)
         if len(self.return_available_positions(player_color)) == 0 and len(
@@ -280,17 +281,18 @@ class Othello:
 
 
 
-# game = Othello()
-#
-# game.print_board()
-# Andrew = game.create_player("Andrew", "black")
-# var = game.return_available_positions("black")
-# print(var)
-# game.play_game("black", (6,5))
-# print(game.return_available_positions("white"))
-# game.play_game("white", (6,6))
-# game.play_game("white", (7,5))
-# game.play_game("black", (8,5))
+game = Othello()
+
+game.print_board()
+Andrew = game.create_player("Andrew", "black")
+var = game.return_available_positions("black")
+print(var)
+game.play_game("black", (6,5))
+print(game.return_available_positions("white"))
+game.play_game("white", (6,6))
+game.play_game("white", (7,5))
+game.play_game("black", (8,5))
+game.play_game("white", (100, 100))
 
 # game = Othello()
 # game.print_board()
